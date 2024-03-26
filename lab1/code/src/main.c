@@ -14,27 +14,25 @@ int main(int argc, char** argv) {
     struct img_chained_t *img_chained;
     struct img_1D_t *result_img;
     struct img_chained_t *result_img_chained;
-    char src[] = "../images/medalion.png";
-    char dst[] = "../images/medalion_custom.png";
 
     int mode = 1;
 
-    /*if (argc != EXPECTED_NB_ARGS) {
+    if (argc != EXPECTED_NB_ARGS) {
         fprintf(stderr, "Invalid number of arguments\n");
         print_usage();
         return EXIT_FAILURE;
-    }*/
+    }
 
-    //mode = atoi(argv[3]);
+    mode = atoi(argv[3]);
 
     if(mode == 1){
-        img_1d = load_image_1D(src);
+        img_1d = load_image_1D(argv[1]);
         result_img = edge_detection_1D(img_1d);
-        save_image(dst, result_img);
+        save_image(argv[2], result_img);
     } else if (mode == 2){
-        img_chained = load_image_chained(src);
+        img_chained = load_image_chained(argv[1]);
         result_img_chained = edge_detection_chained(img_chained);
-        save_image_chained(dst, result_img_chained);
+        save_image_chained(argv[2], result_img_chained);
     }
 
     return 0;

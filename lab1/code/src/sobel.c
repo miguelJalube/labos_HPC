@@ -34,24 +34,24 @@ const uint16_t gauss_kernel[GAUSSIAN_KERNEL_SIZE*GAUSSIAN_KERNEL_SIZE] = {
 
 struct img_1D_t *edge_detection_1D(const struct img_1D_t *input_img){
     struct img_1D_t *res_img1, *res_img2;
-	LIKWID_MARKER_INIT;
-
-    //TODO/
 
     res_img1 = allocate_image_1D(input_img->width,input_img->height, 1);    
     res_img2 = allocate_image_1D(input_img->width,input_img->height, 1);
+
+    
+	LIKWID_MARKER_INIT;
 
 	LIKWID_MARKER_START("grayscale");
     rgb_to_grayscale_1D(input_img, res_img1);
 	LIKWID_MARKER_STOP("grayscale");
     
-	//LIKWID_MARKER_START("gaussian");
+	LIKWID_MARKER_START("gaussian");
     gaussian_filter_1D(res_img1, res_img2, gauss_kernel);
-	//LIKWID_MARKER_STOP("gaussian");
+	LIKWID_MARKER_STOP("gaussian");
     
-	//LIKWID_MARKER_START("sobel");
+	LIKWID_MARKER_START("sobel");
     sobel_filter_1D(res_img2, res_img1, sobel_v_kernel, sobel_h_kernel);
-	//LIKWID_MARKER_STOP("sobel");
+	LIKWID_MARKER_STOP("sobel");
 
     LIKWID_MARKER_CLOSE;
     free(res_img2);
@@ -176,23 +176,34 @@ struct img_chained_t *edge_detection_chained(const struct img_chained_t *input_i
     printf("Start...\n");
     #endif
 
+    
+	LIKWID_MARKER_INIT;
+
+	LIKWID_MARKER_START("grayscale");
     rgb_to_grayscale_chained(input_img, res_img1);
+    LIKWID_MARKER_STOP("grayscale");
     #ifdef DEBUG
     save_image_chained("../images/inter_grey.png",res_img1);
     printf("rgb_to_grayscale_chained() done\n");    
     #endif
 
+	LIKWID_MARKER_START("gaussian");
     gaussian_filter_chained(res_img1, res_img2, gauss_kernel);
+	LIKWID_MARKER_STOP("gaussian");
     #ifdef DEBUG
     save_image_chained("../images/inter_gauss.png",res_img2);
     printf("gaussian_filter_chained() done\n");    
     #endif
     
+	LIKWID_MARKER_START("sobel");
     sobel_filter_chained(res_img2, res_img3, sobel_v_kernel, sobel_h_kernel);
+	LIKWID_MARKER_STOP("sobel");
     #ifdef DEBUG
     save_image_chained("../images/inter_sobel.png",res_img3);
     printf("sobel_filter_chained() done\n");
     #endif
+
+    LIKWID_MARKER_CLOSE;
 
     free(res_img1);
     free(res_img2);
