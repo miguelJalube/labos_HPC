@@ -22,14 +22,12 @@ unsigned int log2_cust(unsigned int v){
 
 // optimized
 unsigned int custom_sqrt_opt(unsigned int number){
-    unsigned int i = 0;
-    for(; i < (log2_cust(number) >> 1); ++i){
-        if(i * i == number){
-            break;
-        }
+    unsigned i = 0;
+    while(i * i < number){
+        ++i;
     }
 
-    if(i == (log2_cust(number) >> 1)){
+    if(i * i < number){
         i = -1;
     }
 
@@ -39,13 +37,13 @@ unsigned int custom_sqrt_opt(unsigned int number){
 // non optimized
 unsigned custom_sqrt(unsigned number){
     unsigned i = 0;
-    for(; i < number/2; ++i){
+    for(; i <= number/2; ++i){
         if(i * i == number){
             break;
         }
     }
 
-    if(i == number/2){
+    if(i > number/2){
         i = -1;
     }
 
