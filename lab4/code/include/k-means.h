@@ -1,5 +1,6 @@
 #include "image.h"
 
+// 128 bits
 typedef struct {
     int count;
     int sum_r;

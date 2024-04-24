@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <xmmintrin.h>
 
 // This function will calculate the euclidean distance between two pixels.
 // Instead of using coordinates, we use the RGB value for evaluating distance.
@@ -121,40 +120,15 @@ void kmeans(struct img_1D_t *image, int num_clusters){
 
     ClusterData *cluster_data = (ClusterData *)calloc(num_clusters, sizeof(ClusterData));
 
-    // A OPTIMISER
     // Compute the sum of the pixel values for each cluster.
-    /*for (int i = 0; i < image->width * image->height; ++i){
+    for (int i = 0; i < image->width * image->height; ++i){
         int cluster = assignments[i];
-        int component = i * image->components;
         cluster_data[cluster].count++;
-        cluster_data[cluster].sum_r += (int)image->data[component + R_OFFSET];
-        cluster_data[cluster].sum_g += (int)image->data[component + G_OFFSET];
-        cluster_data[cluster].sum_b += (int)image->data[component + B_OFFSET];
-    }*/
-
-    int n = image->width * image->height;
-    int i, nb;
-    __m128 v1, v2, v3, v4, v5, v6, v7, index;
-    nb = n - (n % 4);
-
-    for (i = 0; i < n; i += 4){
-        int cluster = assignments[i];
-        int component = i * image->components;
-        index = _mm_set_ps(1, image->data[component + R_OFFSET], image->data[component + G_OFFSET], image->data[component + B_OFFSET]);
-        v1 = _mm_load_ps(&cluster_data[cluster]);
-        v1 = _mm_add_ps(v1, index);
+        cluster_data[cluster].sum_r += (int)image->data[i * image->components + R_OFFSET];
+        cluster_data[cluster].sum_g += (int)image->data[i * image->components + G_OFFSET];
+        cluster_data[cluster].sum_b += (int)image->data[i * image->components + B_OFFSET];
     }
 
-    for (int j = nb; j < n; ++j){
-        int cluster = assignments[j];
-        int component = j * image->components;
-        cluster_data[cluster].count++;
-        cluster_data[cluster].sum_r += (int)image->data[component + R_OFFSET];
-        cluster_data[cluster].sum_g += (int)image->data[component + G_OFFSET];
-        cluster_data[cluster].sum_b += (int)image->data[component + B_OFFSET];
-    }
-
-    // A OPTIMISER
     // Update cluster centers based on the computed sums
     for (int c = 0; c < num_clusters; ++c){
         if (cluster_data[c].count > 0){
@@ -166,7 +140,6 @@ void kmeans(struct img_1D_t *image, int num_clusters){
 
     free(cluster_data);
 
-    // A OPTIMISER
     // Update image data with the cluster centers
     for (int i = 0; i < image->width * image->height; ++i){
         int cluster = assignments[i];

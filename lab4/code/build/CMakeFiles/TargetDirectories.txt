@@ -1,0 +1,4 @@
+/home/miguel/Bureau/HPC/labos_HPC/lab4/code/build/CMakeFiles/edge_detection.dir
+/home/miguel/Bureau/HPC/labos_HPC/lab4/code/build/CMakeFiles/segmentation.dir
+/home/miguel/Bureau/HPC/labos_HPC/lab4/code/build/CMakeFiles/edit_cache.dir
+/home/miguel/Bureau/HPC/labos_HPC/lab4/code/build/CMakeFiles/rebuild_cache.dir
