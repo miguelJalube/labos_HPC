@@ -24,3 +24,15 @@ Profiling group to measure (single-precisision) FLOP rate. The event might
 have a higher per-cycle increment than 15, so the MERGE event is required. In
 contrast to AMD Zen, the Zen2 microarchitecture does not provide events to
 differentiate between single- and double-precision.
+
+
+index : Numerical: 1125122048 1124204544 1127350272 1065353216
+index : Numerical: 1124794368 1123418112 1126891520 1065353216
+
+
+before sqrt : -125.000000 -76.000000 -178.000000
+before sqrt : -71.000000 -54.000000 -146.000000
+before sqrt : -172.000000 -123.000000 -211.000000
+before sqrt : 0.000000 19.000000 -88.000000
+before sqrt : -101.000000 -50.000000 -153.000000
+Programm ended successfully
