@@ -6,5 +6,5 @@ C_DEFINES =
 
 C_INCLUDES = -I/home/miguel/Bureau/HPC/labos_HPC/lab4/code/../lib/stb -I/home/miguel/Bureau/HPC/labos_HPC/lab4/code/include
 
-C_FLAGS =  -O3 -g -Wall -fno-inline -mavx2 -std=gnu11
+C_FLAGS =  -O3 -g -Wall -fno-inline -std=gnu11
 
