@@ -31,6 +31,40 @@ Identifiant constructeur :                  GenuineIntel
     BogoMIPS :                              4992.00
 
 ```
+
+Voici un aperçu des details d'un des coeurs du processeur de la machine utilisée, sachant que le processeu a 16 coeurs :
+
+```bash
+miguel@miguel-Yoga-7-14IAL7:~$ cat /proc/cpuinfo
+processor       : 0
+vendor_id       : GenuineIntel
+cpu family      : 6
+model           : 154
+model name      : 12th Gen Intel(R) Core(TM) i7-1260P
+stepping        : 3
+microcode       : 0x430
+cpu MHz         : 983.942
+cache size      : 18432 KB
+physical id     : 0
+siblings        : 16
+core id         : 0
+cpu cores       : 12
+apicid          : 0
+initial apicid  : 0
+fpu             : yes
+fpu_exception   : yes
+cpuid level     : 32
+wp              : yes
+flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdseed adx smap clflushopt clwb intel_pt sha_ni xsaveopt xsavec xgetbv1 xsaves split_lock_detect avx_vnni dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req hfi vnmi umip pku ospke waitpkg gfni vaes vpclmulqdq rdpid movdiri movdir64b fsrm md_clear serialize arch_lbr ibt flush_l1d arch_capabilities
+vmx flags       : vnmi preemption_timer posted_intr invvpid ept_x_only ept_ad ept_1gb flexpriority apicv tsc_offset vtpr mtf vapic ept vpid unrestricted_guest vapic_reg vid ple shadow_vmcs ept_mode_based_exec tsc_scaling usr_wait_pause
+bugs            : spectre_v1 spectre_v2 spec_store_bypass swapgs eibrs_pbrsb
+bogomips        : 4992.00
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 39 bits physical, 48 bits virtual
+power management:
+```
+
 Les intructions SIMD pouvant être utilisées sur cette architecture sont celles marquées SSE sur https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html.
 
 ## Segmentation
@@ -109,7 +143,7 @@ L'erreur est due à qu'il a été impossible de modifier le code pour avoir 4 co
 #### Copie
 pour la copie la seule chose qui a été optimisée est un code motion. On gagne quelques ms par rapport au fichier de base :
 ```bash
-enchmark 1: build/segmentation ../img/sample_640_2.png 5 ../img/sample_640_2_out_5.png
+Benchmark 1: build/segmentation ../img/sample_640_2.png 5 ../img/sample_640_2_out_5.png
   Time (mean ± σ):      72.8 ms ±   3.6 ms    [User: 55.3 ms, System: 17.3 ms]
   Range (min … max):    69.0 ms …  90.1 ms    42 runs
  
@@ -154,7 +188,24 @@ on peut voir qu'on optimise légèrement les performances de la version liste ch
 L'optimisation de la fonction grayscale en SIMD n'a pas été concluante car il est impossible de faire une addition horizontale dans l'architecture du PC utilisé.
 
 ## Conclusion
-Concernant la segmentation en clusters de l'image 
+Concernant la segmentation en clusters de l'image, l'optimisation en SIMD a permis de gagner quelques ms d'execution. L'optimisation de la distance en SIMD est la seule partie qui a eu des resultats moins bons que l'original.
 
 Les autres fonctions de sobel n'ont pas été optimisées car il est difficile de voir comment vectoriser les datas. Les indices sont parfois négatifs et cela rend compliqué à charger les données dans des vecteurs SIMD.
+
+Voici une comparaison entre toutes les mesures du rapport pour la segmentation et l'edge detection :
+
+### Segmentation
+
+| Méthode / Cluster | Sans SIMD (ms) | SIMD Distance (ms) | SIMD Addition (ms) | SIMD Copie (ms) |
+|--------------------|----------------|--------------------|--------------------|-----------------|
+| 5                  | 73.2  | 73.8 | 72.5 | 72.8 |
+| 10                 | 120.6 | 124.8 | 117.6 | 119.6 |
+| 100                | 897.0 | 955.5 | 899.0 | 894.7 |
+
+### Edge Detection
+
+| Méthode / Type | Sans SIMD (ms) | Avec SIMD (ms) |
+|----------------|----------------|----------------|
+| 1D             | 60.7 | 60.7 |
+| Liste Chainée | 1566 | 1550 |
 
