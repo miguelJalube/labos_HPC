@@ -197,13 +197,17 @@ IW_IMPL(int) iw_check_image_dimensions(struct iw_context *ctx, int w, int h)
 
 IW_IMPL(int) iw_is_valid_density(double density_x, double density_y, int density_code)
 {
-	if(density_x<0.0001 || density_y<0.0001) return 0;
+	// To optimize
+	/*if(density_x<0.0001 || density_y<0.0001) return 0;
 	if(density_x>10000000.0 || density_y>10000000.0) return 0;
 	if(density_x/10.0>density_y) return 0;
 	if(density_y/10.0>density_x) return 0;
 	if(density_code!=IW_DENSITY_UNITS_UNKNOWN && density_code!=IW_DENSITY_UNITS_PER_METER)
 		return 0;
 	return 1;
+	*/
+	int res = density_x<0.0001 || density_y<0.0001 || density_x>10000000.0 || density_y>10000000.0 || density_x/10.0>density_y || density_y/10.0>density_x || density_code!=IW_DENSITY_UNITS_UNKNOWN && density_code!=IW_DENSITY_UNITS_PER_METER;
+	return !res;
 }
 
 static void default_resize_settings(struct iw_resize_settings *rs)
@@ -213,9 +217,11 @@ static void default_resize_settings(struct iw_resize_settings *rs)
 	rs->edge_policy = IW_EDGE_POLICY_STANDARD;
 	rs->blur_factor = 1.0;
 	rs->translate = 0.0;
-	for(i=0;i<3;i++) {
+	// Optimized with memset
+	/*for(i=0;i<3;i++) {
 		rs->channel_offset[i] = 0.0;
-	}
+	}*/
+	memset(rs->channel_offset, 0.0, 3);
 }
 
 IW_IMPL(struct iw_context*) iw_create_context(struct iw_init_params *params)

@@ -4,6 +4,9 @@
 
 #include "imagew-config.h"
 
+#include <emmintrin.h> // Pour les intrinsics SSE2
+#include <smmintrin.h>
+
 #if IW_SUPPORT_PNG == 1
 
 #include <stdio.h>
@@ -782,9 +785,31 @@ static int iw_write_png_file3(struct pw_rsrc_struct *pw)
 	pw->row_pointers = (iw_byte**)iw_malloc(ctx, pw->img.height * sizeof(iw_byte*));
 	if(!pw->row_pointers) goto done;
 
+	// To SIMD
+	// Did not work
 	for(i=0;i<pw->img.height;i++) {
 		pw->row_pointers[i] = &pw->img.pixels[pw->img.bpr*i];
 	}
+
+	/*__m128i vec_bpr = _mm_set1_epi32(pw->img.bpr);
+    for (i = 0; i <= pw->img.height - 4; i += 4) {
+        // Crée un vecteur contenant {i, i+1, i+2, i+3}
+        __m128i vec_i = _mm_add_epi32(_mm_set1_epi32(i), _mm_setr_epi32(0, 1, 2, 3));
+
+        // Multiplie le vecteur vec_i par bpr pour obtenir les décalages
+        __m128i vec_offsets = _mm_mullo_epi32(vec_i, vec_bpr);
+
+        // Stocke les résultats dans row_pointers
+        for (int j = 0; j < 4; ++j) {
+            int offset = _mm_extract_epi32(vec_offsets, j);
+            pw->row_pointers[i + j] = &pw->img.pixels[offset];
+        }
+    }
+    // Traiter les éléments restants
+    for (; i < pw->img.height; ++i) {
+        pw->row_pointers[i] = &pw->img.pixels[pw->img.bpr * i];
+    }*/
+
 
 	if(lpng_bit_depth<8) {
 		png_set_packing(pw->png_ptr);
