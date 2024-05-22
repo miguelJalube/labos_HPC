@@ -8,6 +8,16 @@
 #include "../powercap/inc/powercap-rapl-sysfs.h"
 #include "../powercap/src/powercap-common.h"
 
+#define ARRAY_SIZE 1000000
+
+float sum_non_vectorized(float *array, size_t size) {
+    float sum = 0.0f;
+    for (size_t i = 0; i < size; i++) {
+        sum += array[i];
+    }
+    return sum;
+}
+
 const char* to_string(powercap_rapl_zone zone) {
     switch (zone) {
         case POWERCAP_RAPL_ZONE_PACKAGE :
@@ -30,6 +40,35 @@ const char* to_string(powercap_rapl_zone zone) {
             break;
     }
 }
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <xmmintrin.h> // SSE
+
+#define ARRAY_SIZE 1000000
+
+float sum_vectorized_sse(float *array, size_t size) {
+    __m128 sum_vec = _mm_setzero_ps(); // Initialize a vector of four zeros
+    float sum_array[4] __attribute__((aligned(16))); // To store the results from the vector
+
+    size_t i;
+    for (i = 0; i < size - (size % 4); i += 4) {
+        __m128 vec = _mm_loadu_ps(&array[i]); // Load four floats into the vector
+        sum_vec = _mm_add_ps(sum_vec, vec); // Sum the vectors
+    }
+
+    // Sum the values in the vector
+    _mm_store_ps(sum_array, sum_vec);
+    float sum = sum_array[0] + sum_array[1] + sum_array[2] + sum_array[3];
+
+    // Sum any remaining values
+    for (; i < size; i++) {
+        sum += array[i];
+    }
+
+    return sum;
+}
+
 
 int main(int argc, char** argv){
     uint64_t *energy_uj1, *energy_uj2;
@@ -68,7 +107,28 @@ int main(int argc, char** argv){
             }
         }
     }
-    // CODE MESURER
+    // CODE A MESURER
+    //=======================================================================
+
+    // ChatGPT generated float array sum code
+
+    // Allocate memory for the array
+    float *array = (float*) malloc(ARRAY_SIZE * sizeof(float));
+
+    // Initialize the array with 1.0 to avoid overflow
+    for (size_t i = 0; i < ARRAY_SIZE; i++) {
+        array[i] = 1.0f;
+    }
+
+    // Sum the array using the non-vectorized version
+    float sum = sum_non_vectorized(array, ARRAY_SIZE);
+    printf("Sum (non-vectorized): %f\n", sum);
+
+    // Free allocated memory
+    free(array);
+
+    //=======================================================================
+
     // On remesure la consomation énergétique
     for (size_t j = 0; j < npackages; j++) {
         if (supported[j]){
