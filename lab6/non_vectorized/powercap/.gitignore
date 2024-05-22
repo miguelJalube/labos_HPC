@@ -3,3 +3,6 @@ cmake_install.cmake
 CMakeCache.txt
 Makefile
 MyProgram
+*.a
+*.o
+
