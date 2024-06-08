@@ -129,6 +129,19 @@ find_sequence/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/find_sequence.dir/build.make CMakeFiles/find_sequence.dir/build
 .PHONY : find_sequence/fast
 
+#=============================================================================
+# Target rules for targets named find_sequence_p
+
+# Build rule for target.
+find_sequence_p: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 find_sequence_p
+.PHONY : find_sequence_p
+
+# fast build rule for target.
+find_sequence_p/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/find_sequence_p.dir/build.make CMakeFiles/find_sequence_p.dir/build
+.PHONY : find_sequence_p/fast
+
 src/main.o: src/main.c.o
 .PHONY : src/main.o
 
@@ -153,6 +166,30 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/find_sequence.dir/build.make CMakeFiles/find_sequence.dir/src/main.c.s
 .PHONY : src/main.c.s
 
+src/mainomp.o: src/mainomp.c.o
+.PHONY : src/mainomp.o
+
+# target to build an object file
+src/mainomp.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/find_sequence_p.dir/build.make CMakeFiles/find_sequence_p.dir/src/mainomp.c.o
+.PHONY : src/mainomp.c.o
+
+src/mainomp.i: src/mainomp.c.i
+.PHONY : src/mainomp.i
+
+# target to preprocess a source file
+src/mainomp.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/find_sequence_p.dir/build.make CMakeFiles/find_sequence_p.dir/src/mainomp.c.i
+.PHONY : src/mainomp.c.i
+
+src/mainomp.s: src/mainomp.c.s
+.PHONY : src/mainomp.s
+
+# target to generate assembly for a file
+src/mainomp.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/find_sequence_p.dir/build.make CMakeFiles/find_sequence_p.dir/src/mainomp.c.s
+.PHONY : src/mainomp.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,9 +199,13 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... find_sequence"
+	@echo "... find_sequence_p"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/mainomp.o"
+	@echo "... src/mainomp.i"
+	@echo "... src/mainomp.s"
 .PHONY : help
 
 
