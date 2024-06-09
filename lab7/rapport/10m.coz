@@ -1,0 +1,42 @@
+startup	time=1717930835599737647
+experiment	selected=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	speedup=0.00	duration=500254251	selected-samples=10
+throughput-point	name=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:60	delta=1
+throughput-point	name=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:14	delta=4111
+runtime	time=571254867
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:13	count=1
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	count=88
+startup	time=1717930836215732412
+experiment	selected=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	speedup=0.00	duration=500265855	selected-samples=301
+throughput-point	name=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:60	delta=13
+throughput-point	name=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:14	delta=1001460
+runtime	time=520979747
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:14	count=2
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	count=432
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:50	count=2
+startup	time=1717930836778708527
+experiment	selected=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	speedup=0.00	duration=500230107	selected-samples=2028
+throughput-point	name=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:14	delta=5624137
+runtime	time=520629295
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:13	count=2
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:14	count=2
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	count=2149
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:21	count=1
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:50	count=6
+startup	time=1717930837341281953
+experiment	selected=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	speedup=0.00	duration=500222667	selected-samples=4055
+throughput-point	name=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:14	delta=9683320
+runtime	time=520613819
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:13	count=6
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:14	count=4
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	count=4103
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:21	count=1
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:50	count=14
+startup	time=1717930837936999138
+experiment	selected=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	speedup=0.20	duration=398024805	selected-samples=4074
+throughput-point	name=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:14	delta=9731349
+runtime	time=515318519
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:13	count=12
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:14	count=6
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	count=4117
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:17	count=1
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:50	count=10

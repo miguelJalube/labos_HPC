@@ -1,0 +1,30 @@
+startup	time=1717930861900496243
+runtime	time=40420657
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	count=52
+startup	time=1717930861979014349
+experiment	selected=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	speedup=0.00	duration=500263443	selected-samples=102
+throughput-point	name=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:60	delta=12
+throughput-point	name=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:14	delta=326024
+runtime	time=520713237
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	count=155
+startup	time=1717930862530552068
+experiment	selected=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	speedup=0.50	duration=483838502	selected-samples=249
+throughput-point	name=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:14	delta=492333
+runtime	time=520519223
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	count=350
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:21	count=1
+startup	time=1717930863091060380
+experiment	selected=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	speedup=0.15	duration=491152488	selected-samples=240
+throughput-point	name=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:14	delta=552204
+runtime	time=520617350
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:13	count=1
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:14	count=2
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	count=318
+startup	time=1717930863655644368
+experiment	selected=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	speedup=0.00	duration=500277203	selected-samples=264
+throughput-point	name=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:14	delta=650645
+runtime	time=520711784
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:14	count=1
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:15	count=335
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:21	count=1
+samples	location=/home/miguel/Bureau/HPC/labos_HPC/lab7/code/src/mainomp.c:50	count=2

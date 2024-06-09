@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <coz.h>
 
 int find_sequence_in_file(const char *filename, const char *sequence) {
     FILE *file = fopen(filename, "r");
@@ -14,6 +15,7 @@ int find_sequence_in_file(const char *filename, const char *sequence) {
     int ch;
 
     while ((ch = fgetc(file)) != EOF) {
+        COZ_PROGRESS;
         if (ch == sequence[match_count]) {
             match_count++;
             if (match_count == sequence_length) {
@@ -24,6 +26,9 @@ int find_sequence_in_file(const char *filename, const char *sequence) {
             match_count = (ch == sequence[0]) ? 1 : 0;
         }
     }
+
+
+    COZ_PROGRESS;
 
     fclose(file);
     return 0; 

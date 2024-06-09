@@ -11,7 +11,6 @@ int find_sequence_in_chunk(FILE *file, const char *sequence, long start, long en
 
     fseek(file, start, SEEK_SET);
     while (ftell(file) < end && (ch = fgetc(file)) != EOF) {
-
         COZ_PROGRESS;
         if (ch == sequence[match_count]) {
             match_count++;
@@ -21,8 +20,6 @@ int find_sequence_in_chunk(FILE *file, const char *sequence, long start, long en
         } else {
             match_count = (ch == sequence[0]) ? 1 : 0;
         }
-
-        COZ_PROGRESS;
     }
 
     return 0;
@@ -60,6 +57,7 @@ int find_sequence_in_file(const char *filename, const char *sequence) {
                 }
             }
         }
+        COZ_PROGRESS;
     }
 
     fclose(file);
